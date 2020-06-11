@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<script>
+
+    function submit() {
+        let xmlhttp = new XMLHttpRequest();   // new HttpRequest instance
+        let theUrl = "/";
+        xmlhttp.open("POST", theUrl);
+        xmlhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        //xmlhttp.send(JSON.stringify(document.getElementsByName("payload")));
+
+        xmlhttp.send(JSON.stringify({
+            "finished_at": 1565383804,
+            "variables": {},
+            "agent": null,
+            "team_id": "16574402-355b-4095-9d7f-c8fc8e664f88",
+            "result": "fail",
+            "team_name": "Jacob Meyers",
+            "started_at": 1.5638144E9,
+            "agent_expired": null,
+            "environment_uuid": "b8d96945-abdd-443d-9c6e-747e857570f9",
+            "environment_name": "Test Settings",
+            "test_run_url": "https://www.runscope.com/radar/25itiezty229/d98e3120-bc23-402b-b83a-969a47ac19b8/results/11616c81-70e1-4d69-9857-3a7a062252d0",
+            "test_run_id": "11616c81-70e1-4d69-9857-3a7a062252d0",
+            "bucket_key": "25itiezty229",
+            "region_name": "US Virginia - None",
+            "bucket_name": "Alert Jam",
+            "test_name": "Test Test ",
+            "test_id": "d98e3120-bc23-402b-b83a-969a47ac19b8",
+            "region": "us1",
+            "initial_variables": {},
+            "test_url": "https://www.runscope.com/radar/25itiezty229/d98e3120-bc23-402b-b83a-969a47ac19b8",
+            "trigger_url": "https://api.runscope.com/radar/368b74a5-967a-4408-a93e-20957b573720/trigger",
+            "requests": [
+            {
+                "response_size_bytes": 196,
+                "url": "https://yourapihere.com",
+                "variables": {
+                    "fail": 0,
+                    "total": 0,
+                    "pass": 0
+                },
+                "step_type": "request",
+                "note": "",
+                "result": "fail",
+                "response_status_code": "200",
+                "scripts": {
+                    "fail": 0,
+                    "total": 0,
+                    "pass": 0
+                },
+                "method": "GET",
+                "response_time_ms": 7,
+                "assertions": {
+                    "fail": 1,
+                    "total": 1,
+                    "pass": 0
+                }
+            }
+        ]
+        }
+        ));
+
+
+    }
+</script>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Input</title>
+</head>
+<body>
+<form onsubmit=send()>
+    <label for="payload">Input test runscope results:</label><br>
+    <input type="textarea" id="payload" name="payload"><br>
+    <input type="submit" value="Submit">
+</form>
+
+</body>
+</html>
