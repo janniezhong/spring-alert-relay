@@ -13,6 +13,18 @@ public class InputRecord {
     private Date finished_at;
     private Integer execTime;
 
+    public InputRecord() {
+    }
+
+    public InputRecord(String test_name, String test_run_id, Boolean result, Date started_at, Date finished_at, Integer execTime) {
+        this.test_name = test_name;
+        this.test_run_id = test_run_id;
+        this.result = result;
+        this.started_at = started_at;
+        this.finished_at = finished_at;
+        this.execTime = execTime;
+    }
+
     public String getTest_name() {
         return test_name;
     }

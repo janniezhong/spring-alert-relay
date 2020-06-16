@@ -2,16 +2,20 @@ package visa.SREIntern.init.domain;
 
 import org.json.*;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 public class RSInput implements Input{
 
-    private Long finished_at;
+    private Date finished_at;
     //private Variables variables;
     private String agent;
     private String team_id;
-    private String result;
+    private Boolean result;
     private String team_name;
-    private Long started_at;
+    private Date started_at;
     private String agent_expired;
     private String environment_uuid;
     private String environment_name;
@@ -53,9 +57,18 @@ public class RSInput implements Input{
 
         test_name = obj.getString("test_name");
         test_run_id = obj.getString("test_run_id");
-        result = obj.getString("result");
-        started_at = obj.getLong("started_at");
-        finished_at = obj.getLong("finished_at");
+        String result_String = obj.getString("result");
+        if (result_String.equalsIgnoreCase("pass")){
+            result = true;
+        } else {
+            result = false;
+        }
+        long started = obj.getLong("started_at");
+        long finished = obj.getLong("finished_at");
+
+        DateFormat simple = new SimpleDateFormat("dd MMM yyyy HH:mm:ss:SSS Z");
+        started_at = new Date(started);
+        finished_at = new Date(finished);
 
         JSONArray requests = obj.getJSONArray("requests");
         JSONObject request_content = requests.getJSONObject(0);
@@ -105,51 +118,10 @@ public class RSInput implements Input{
     }
 
 
-    public RSInput(Long finished_at, String agent, String team_id, String result, String team_name, Long started_at, String agent_expired, String environment_uuid, String environment_name, String test_run_url, String test_run_id, String bucket_key, String region_name, String bucket_name, String test_name, String test_id, String region, String test_url, String trigger_url, int request_response_size_bytes, String requests_url, int variables_fail, int variables_total, int variables_pass, String requests_step_type, String requests_note, String requests_result, String requests_response_status_code, int scripts_fail, int scripts_total, int scripts_pass, String requests_method, int response_time_ms, int assertions_fail, int assertions_total, int assertions_pass) {
-        this.finished_at = finished_at;
-        this.agent = agent;
-        this.team_id = team_id;
-        this.result = result;
-        this.team_name = team_name;
-        this.started_at = started_at;
-        this.agent_expired = agent_expired;
-        this.environment_uuid = environment_uuid;
-        this.environment_name = environment_name;
-        this.test_run_url = test_run_url;
-        this.test_run_id = test_run_id;
-        this.bucket_key = bucket_key;
-        this.region_name = region_name;
-        this.bucket_name = bucket_name;
-        this.test_name = test_name;
-        this.test_id = test_id;
-        this.region = region;
-        this.test_url = test_url;
-        this.trigger_url = trigger_url;
-
-
-        this.requests_response_size_bytes = request_response_size_bytes;
-        this.requests_url = requests_url;
-        this.variables_fail = variables_fail;
-        this.variables_total = variables_total;
-        this.variables_pass = variables_pass;
-        this.requests_step_type = requests_step_type;
-        this.requests_note = requests_note;
-        this.requests_result = requests_result;
-        this.requests_response_status_code = requests_response_status_code;
-        this.scripts_fail = scripts_fail;
-        this.scripts_total = scripts_total;
-        this.scripts_pass = scripts_pass;
-        this.requests_method = requests_method;
-        this.response_time_ms = response_time_ms;
-        this.assertions_fail = assertions_fail;
-        this.assertions_total = assertions_total;
-        this.assertions_pass = assertions_pass;
-    }
 
     @Override
     public InputRecord inputData() {
-        InputRecord link = new InputRecord();
-        //set fields
+        InputRecord link = new InputRecord(test_name, test_run_id, result, started_at, finished_at, response_time_ms);
 
         System.out.println("Data inserted to DB!");
         return link;
@@ -157,14 +129,11 @@ public class RSInput implements Input{
     }
 
 
-
-
-
-    public Long getFinished_at() {
+    public Date getFinished_at() {
         return finished_at;
     }
 
-    public void setFinished_at(Long finished_at) {
+    public void setFinished_at(Date finished_at) {
         this.finished_at = finished_at;
     }
 
@@ -184,11 +153,11 @@ public class RSInput implements Input{
         this.team_id = team_id;
     }
 
-    public String getResult() {
+    public Boolean getResult() {
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(Boolean result) {
         this.result = result;
     }
 
@@ -200,11 +169,11 @@ public class RSInput implements Input{
         this.team_name = team_name;
     }
 
-    public Long getStarted_at() {
+    public Date getStarted_at() {
         return started_at;
     }
 
-    public void setStarted_at(Long started_at) {
+    public void setStarted_at(Date started_at) {
         this.started_at = started_at;
     }
 
