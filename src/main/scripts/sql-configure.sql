@@ -19,3 +19,25 @@ GRANT SELECT ON ars_dev.* to 'ars_dev_user'@'%';
 GRANT INSERT ON ars_dev.* to 'ars_dev_user'@'%';
 GRANT DELETE ON ars_dev.* to 'ars_dev_user'@'%';
 GRANT UPDATE ON ars_dev.* to 'ars_dev_user'@'%';
+
+
+#Create table
+create table input (id bigint not null, test_name varchar(255), test_run_id varchar(255), result BIT, started_at bigint, finished_at bigint, response_time_ms integer not null, primary key (id));
+
+#Stored Procedure
+DELIMITER $$
+
+DROP PROCEDURE IF EXISTS `ars_dev`.`getRecord` $$
+CREATE PROCEDURE `ars_dev`.`getRecord` (
+    IN in_id INTEGER,
+    OUT out_name VARCHAR(255),
+    OUT out_result BIT,
+    OUT out_time INTEGER)
+BEGIN
+    SELECT test_name, result, response_time_ms
+    INTO out_name, out_result, out_time
+    FROM input where id = in_id;
+END $$
+
+DELIMITER ;
+
