@@ -6,23 +6,21 @@ import java.util.Date;
 
 @Component
 public class InputRecord {
+    private Integer id;
     private String test_name;
     private String test_run_id;
     private Boolean result;
     private Date started_at;
     private Date finished_at;
-    private Integer execTime;
+    private Integer response_time_ms;
 
-    public InputRecord() {
+
+    public Integer getId() {
+        return id;
     }
 
-    public InputRecord(String test_name, String test_run_id, Boolean result, Date started_at, Date finished_at, Integer execTime) {
-        this.test_name = test_name;
-        this.test_run_id = test_run_id;
-        this.result = result;
-        this.started_at = started_at;
-        this.finished_at = finished_at;
-        this.execTime = execTime;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public String getTest_name() {
@@ -65,11 +63,11 @@ public class InputRecord {
         this.finished_at = finished_at;
     }
 
-    public Integer getExecTime() {
-        return execTime;
+    public Integer getResponse_time_ms() {
+        return response_time_ms;
     }
 
-    public void setExecTime(Integer execTime) {
-        this.execTime = execTime;
+    public void setResponse_time_ms(Integer response_time_ms) {
+        this.response_time_ms = response_time_ms;
     }
 }

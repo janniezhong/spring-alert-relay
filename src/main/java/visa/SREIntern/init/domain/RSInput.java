@@ -117,16 +117,12 @@ public class RSInput implements Input{
 
     }
 
-
-
     @Override
-    public InputRecord inputData() {
-        InputRecord link = new InputRecord(test_name, test_run_id, result, started_at, finished_at, response_time_ms);
-
-        System.out.println("Data inserted to DB!");
-        return link;
+    public void inputData(InputJDBCTemplate inputJDBCTemplate) {
+        inputJDBCTemplate.create(test_name, test_run_id, result, started_at, finished_at, response_time_ms);
 
     }
+
 
 
     public Date getFinished_at() {
@@ -417,4 +413,45 @@ public class RSInput implements Input{
         this.assertions_pass = assertions_pass;
     }
 
+    @Override
+    public String toString() {
+        return "RSInput{" +
+                "finished_at=" + finished_at +
+                ", agent='" + agent + '\'' +
+                ", team_id='" + team_id + '\'' +
+                ", result=" + result +
+                ", team_name='" + team_name + '\'' +
+                ", started_at=" + started_at +
+                ", agent_expired='" + agent_expired + '\'' +
+                ", environment_uuid='" + environment_uuid + '\'' +
+                ", environment_name='" + environment_name + '\'' +
+                ", test_run_url='" + test_run_url + '\'' +
+                ", test_run_id='" + test_run_id + '\'' +
+                ", bucket_key='" + bucket_key + '\'' +
+                ", region_name='" + region_name + '\'' +
+                ", bucket_name='" + bucket_name + '\'' +
+                ", test_name='" + test_name + '\'' +
+                ", test_id='" + test_id + '\'' +
+                ", region='" + region + '\'' +
+                ", test_url='" + test_url + '\'' +
+                ", trigger_url='" + trigger_url + '\'' +
+                ", requests_response_size_bytes=" + requests_response_size_bytes +
+                ", requests_url='" + requests_url + '\'' +
+                ", variables_fail=" + variables_fail +
+                ", variables_total=" + variables_total +
+                ", variables_pass=" + variables_pass +
+                ", requests_step_type='" + requests_step_type + '\'' +
+                ", requests_note='" + requests_note + '\'' +
+                ", requests_result='" + requests_result + '\'' +
+                ", requests_response_status_code='" + requests_response_status_code + '\'' +
+                ", scripts_fail=" + scripts_fail +
+                ", scripts_total=" + scripts_total +
+                ", scripts_pass=" + scripts_pass +
+                ", requests_method='" + requests_method + '\'' +
+                ", response_time_ms=" + response_time_ms +
+                ", assertions_fail=" + assertions_fail +
+                ", assertions_total=" + assertions_total +
+                ", assertions_pass=" + assertions_pass +
+                '}';
+    }
 }

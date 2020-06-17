@@ -1,6 +1,7 @@
 package visa.SREIntern.init.domain;
 
 public interface Input {
-    InputRecord inputData();
+    void inputData(InputJDBCTemplate inputJDBCTemplate);
+    String toString();
 
 }

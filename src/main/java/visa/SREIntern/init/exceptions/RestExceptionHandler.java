@@ -1,4 +1,4 @@
-package visa.SREIntern.init;
+package visa.SREIntern.init.exceptions;
 
 import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageNotReadableException;

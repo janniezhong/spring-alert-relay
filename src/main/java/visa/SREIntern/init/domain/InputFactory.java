@@ -12,6 +12,7 @@ public class InputFactory {
         } else if(inputType.equalsIgnoreCase("GHOST INSPECTOR")){
             return new GIInput(obj);
         } else if (inputType.equalsIgnoreCase("RUNSCOPE")){
+            System.out.println("Returning a Runscope object.");
             return new RSInput(obj);
         }
 

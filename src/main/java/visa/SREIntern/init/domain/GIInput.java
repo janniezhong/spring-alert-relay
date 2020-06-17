@@ -9,7 +9,9 @@ public class GIInput implements Input{
     }
 
     @Override
-    public InputRecord inputData() {
-        return null;
+    public void inputData(InputJDBCTemplate inputJDBCTemplate) {
+
     }
+
+
 }
