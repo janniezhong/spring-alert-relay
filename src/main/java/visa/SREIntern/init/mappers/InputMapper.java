@@ -19,6 +19,7 @@ public class InputMapper implements RowMapper<InputRecord>{
         input.setStarted_at(rs.getDate("started_at"));
         input.setFinished_at(rs.getDate("finished_at"));
         input.setResponse_time_ms(rs.getInt("response_time_ms"));
+        input.setTest_origin(rs.getInt("test_origin"));
 
         return input;
     }

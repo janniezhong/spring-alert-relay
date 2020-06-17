@@ -6,7 +6,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 public interface RelayController {
-    @PostMapping("/")
-    String process(@RequestBody String input);
+    @PostMapping("/runscope")
+    String processRS(@RequestBody String input);
+
+    @PostMapping("/ghostinspector")
+    String processGI(@RequestBody String input);
 
 }

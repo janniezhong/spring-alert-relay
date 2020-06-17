@@ -22,7 +22,7 @@ GRANT UPDATE ON ars_dev.* to 'ars_dev_user'@'%';
 
 
 #Create table
-create table input (id bigint not null auto_increment, test_name varchar(255), test_run_id varchar(255), result BIT, started_at DATETIME, finished_at DATETIME, response_time_ms integer not null, primary key (id));
+create table input (id bigint not null auto_increment, test_name varchar(255), test_run_id varchar(255), result BIT, started_at DATETIME, finished_at DATETIME, response_time_ms integer not null, test_origin integer not null, primary key (id));
 
 #Stored Procedure
 DELIMITER $$

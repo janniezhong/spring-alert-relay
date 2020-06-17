@@ -13,7 +13,15 @@ public class InputRecord {
     private Date started_at;
     private Date finished_at;
     private Integer response_time_ms;
+    private Integer test_origin;
 
+    public Integer getTest_origin() {
+        return test_origin;
+    }
+
+    public void setTest_origin(Integer test_origin) {
+        this.test_origin = test_origin;
+    }
 
     public Integer getId() {
         return id;

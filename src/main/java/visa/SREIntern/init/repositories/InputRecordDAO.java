@@ -18,7 +18,7 @@ public interface InputRecordDAO {
      * This is the method to be used to create
      * a record in the Input table.
      */
-    void create(String test_name, String test_run_id, Boolean result, Date started_at, Date finished_at, Integer response_time_ms);
+    void create(String test_name, String test_run_id, Boolean result, Date started_at, Date finished_at, Integer response_time_ms, Integer test_origin);
 
     /**
      * This is the method to be used to list down

@@ -22,12 +22,12 @@ public class InputJDBCTemplate implements InputRecordDAO {
     }
 
     @Override
-    public void create(String test_name, String test_run_id, Boolean result, Date started_at, Date finished_at, Integer response_time_ms) {
+    public void create(String test_name, String test_run_id, Boolean result, Date started_at, Date finished_at, Integer response_time_ms, Integer test_origin) {
         jdbcTemplateObject = new JdbcTemplate(dataSource);
-        String SQL = "insert into input (test_name, test_run_id, result, started_at, finished_at, response_time_ms) values (?, ?, ?, ?, ? ,?)";
+        String SQL = "insert into input (test_name, test_run_id, result, started_at, finished_at, response_time_ms, test_origin) values (?, ?, ?, ?, ?, ?, ?)";
 
-        jdbcTemplateObject.update( SQL, test_name, test_run_id, result, started_at, finished_at, response_time_ms);
-        System.out.println("Created Record Test Name = " + test_name + " Result = " + result + ", Start Time = " + started_at + ", End Time = " + finished_at + ", Response Time = " + response_time_ms);
+        jdbcTemplateObject.update( SQL, test_name, test_run_id, result, started_at, finished_at, response_time_ms, test_origin);
+        System.out.println("Created Record Test Name = " + test_name + " Result = " + result + ", Start Time = " + started_at + ", End Time = " + finished_at + ", Response Time = " + response_time_ms + ", Test Type = " + test_origin);
         return;
     }
 
@@ -46,6 +46,7 @@ public class InputJDBCTemplate implements InputRecordDAO {
         input.setStarted_at((Date) out.get("started_at"));
         input.setFinished_at((Date) out.get("finished_at"));
         input.setResponse_time_ms((Integer) out.get("response_time_ms"));
+        input.setTest_origin((Integer) out.get("test_origin"));
         return input;
 
     }

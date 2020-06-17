@@ -29,30 +29,22 @@ public class RelayControllerImpl implements RelayController {
     }
 
     @Override
-    public String process(String input){
+    public String processRS(String input){
         try{
             System.out.println("Server up and running.");
 
+            System.out.println("It's a Runscope test!");
+
             JSONObject obj = new JSONObject(input);
-
             System.out.println("JSONObject created successfully.");
+            Input imp = inputFactory.getInput("RUNSCOPE",obj);
+            System.out.println("Runscope object returned.");
 
-            // Figure out which alert service this came from
-            if (1 == 0){ // Ghost Inspector
-
-            } else { //Runscope
-                System.out.println("It's a Runscope test!");
-                Input imp = inputFactory.getInput("RUNSCOPE",obj);
-                System.out.println("Runscope object returned.");
-
-                if (imp == null){
-                    System.out.println("Houston, we have a problem");
-                } else {
-                    System.out.println(imp.toString());
-
-                    imp.inputData(inputJDBCTemplate);
-                }
-
+            if (imp == null){
+                System.out.println("Houston, we have a problem");
+            } else {
+                System.out.println(imp.toString());
+                imp.inputData(inputJDBCTemplate);
             }
 
             return ("success");
@@ -60,7 +52,32 @@ public class RelayControllerImpl implements RelayController {
             System.out.println(exc.toString());
             return null;
         }
+    }
 
+    @Override
+    public String processGI(String input){
+        try{
+            System.out.println("Server up and running.");
+
+            System.out.println("It's a Ghost Inspector test!");
+
+            JSONObject obj = new JSONObject(input);
+            System.out.println("JSONObject created successfully.");
+            Input imp = inputFactory.getInput("GHOST INSPECTOR",obj);
+            System.out.println("Ghost Inspector object returned.");
+
+            if (imp == null){
+                System.out.println("Houston, we have a problem");
+            } else {
+                System.out.println(imp.toString());
+                imp.inputData(inputJDBCTemplate);
+            }
+
+            return ("success");
+        } catch(Exception exc){
+            System.out.println(exc.toString());
+            return null;
+        }
     }
 
 //    @GetMapping("/")

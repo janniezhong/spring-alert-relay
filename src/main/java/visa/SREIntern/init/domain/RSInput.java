@@ -9,6 +9,8 @@ import java.util.Date;
 
 public class RSInput implements Input{
 
+    private final Integer test_origin = 2;
+
     private Date finished_at;
     //private Variables variables;
     private String agent;
@@ -119,7 +121,7 @@ public class RSInput implements Input{
 
     @Override
     public void inputData(InputJDBCTemplate inputJDBCTemplate) {
-        inputJDBCTemplate.create(test_name, test_run_id, result, started_at, finished_at, response_time_ms);
+        inputJDBCTemplate.create(test_name, test_run_id, result, started_at, finished_at, response_time_ms, test_origin);
 
     }
 
