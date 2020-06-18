@@ -2,22 +2,22 @@ package visa.SREIntern.init.domain;
 
 import org.json.*;
 
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 
 public class RSInput implements Input{
 
-    private final Integer test_origin = 2;
+    private final Integer test_origin = 1;
 
-    private Date finished_at;
+    private Timestamp finished_at;
     //private Variables variables;
     private String agent;
     private String team_id;
     private Boolean result;
     private String team_name;
-    private Date started_at;
+    private Timestamp started_at;
     private String agent_expired;
     private String environment_uuid;
     private String environment_name;
@@ -68,9 +68,8 @@ public class RSInput implements Input{
         long started = obj.getLong("started_at");
         long finished = obj.getLong("finished_at");
 
-        DateFormat simple = new SimpleDateFormat("dd MMM yyyy HH:mm:ss:SSS Z");
-        started_at = new Date(started);
-        finished_at = new Date(finished);
+        started_at = new Timestamp(started);
+        finished_at = new Timestamp(finished);
 
         JSONArray requests = obj.getJSONArray("requests");
         JSONObject request_content = requests.getJSONObject(0);
@@ -127,11 +126,11 @@ public class RSInput implements Input{
 
 
 
-    public Date getFinished_at() {
+    public Timestamp getFinished_at() {
         return finished_at;
     }
 
-    public void setFinished_at(Date finished_at) {
+    public void setFinished_at(Timestamp finished_at) {
         this.finished_at = finished_at;
     }
 
@@ -167,11 +166,11 @@ public class RSInput implements Input{
         this.team_name = team_name;
     }
 
-    public Date getStarted_at() {
+    public Timestamp getStarted_at() {
         return started_at;
     }
 
-    public void setStarted_at(Date started_at) {
+    public void setStarted_at(Timestamp started_at) {
         this.started_at = started_at;
     }
 

@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 @ControllerAdvice
-public class RestExceptionHandler extends ResponseEntityExceptionHandler {
+public class RestExceptionHandler extends RuntimeException {
 //    @ExceptionHandler(NoHandlerFoundException.class)
 //    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    public @ResponseBody ResponseEntity<ErrorResponse> handleNoMethodException(HttpServletRequest request,
+//    public @ResponseBody ResponseEntity<ErrorResponse> h andleNoMethodException(HttpServletRequest request,
 //                                                                               NoHandlerFoundException ex) {
 //        ErrorResponse errorResponse = new ErrorResponse(ex);
 //        errorResponse.setErrorMessage("resource not found with exception");

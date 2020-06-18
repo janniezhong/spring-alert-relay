@@ -1,5 +1,5 @@
 package visa.SREIntern.init.domain;
-import java.util.Date;
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -22,7 +22,7 @@ public class InputJDBCTemplate implements InputRecordDAO {
     }
 
     @Override
-    public void create(String test_name, String test_run_id, Boolean result, Date started_at, Date finished_at, Integer response_time_ms, Integer test_origin) {
+    public void create(String test_name, String test_run_id, Boolean result, Timestamp started_at, Timestamp finished_at, Integer response_time_ms, Integer test_origin) {
         jdbcTemplateObject = new JdbcTemplate(dataSource);
         String SQL = "insert into input (test_name, test_run_id, result, started_at, finished_at, response_time_ms, test_origin) values (?, ?, ?, ?, ?, ?, ?)";
 
@@ -43,8 +43,8 @@ public class InputJDBCTemplate implements InputRecordDAO {
         input.setTest_name((String) out.get("test_name"));
         input.setTest_run_id((String) out.get("test_run_id"));
         input.setResult((Boolean) out.get("result"));
-        input.setStarted_at((Date) out.get("started_at"));
-        input.setFinished_at((Date) out.get("finished_at"));
+        input.setStarted_at((Timestamp) out.get("started_at"));
+        input.setFinished_at((Timestamp) out.get("finished_at"));
         input.setResponse_time_ms((Integer) out.get("response_time_ms"));
         input.setTest_origin((Integer) out.get("test_origin"));
         return input;

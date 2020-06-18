@@ -33,8 +33,6 @@ public class RelayControllerImpl implements RelayController {
         try{
             System.out.println("Server up and running.");
 
-            System.out.println("It's a Runscope test!");
-
             JSONObject obj = new JSONObject(input);
             System.out.println("JSONObject created successfully.");
             Input imp = inputFactory.getInput("RUNSCOPE",obj);
@@ -43,7 +41,6 @@ public class RelayControllerImpl implements RelayController {
             if (imp == null){
                 System.out.println("Houston, we have a problem");
             } else {
-                System.out.println(imp.toString());
                 imp.inputData(inputJDBCTemplate);
             }
 
@@ -59,8 +56,6 @@ public class RelayControllerImpl implements RelayController {
         try{
             System.out.println("Server up and running.");
 
-            System.out.println("It's a Ghost Inspector test!");
-
             JSONObject obj = new JSONObject(input);
             System.out.println("JSONObject created successfully.");
             Input imp = inputFactory.getInput("GHOST INSPECTOR",obj);
@@ -69,7 +64,6 @@ public class RelayControllerImpl implements RelayController {
             if (imp == null){
                 System.out.println("Houston, we have a problem");
             } else {
-                System.out.println(imp.toString());
                 imp.inputData(inputJDBCTemplate);
             }
 

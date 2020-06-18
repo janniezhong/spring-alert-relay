@@ -2,7 +2,8 @@ package visa.SREIntern.init.domain;
 
 import org.springframework.stereotype.Component;
 
-import java.util.Date;
+import java.sql.Timestamp;
+
 
 @Component
 public class InputRecord {
@@ -10,8 +11,8 @@ public class InputRecord {
     private String test_name;
     private String test_run_id;
     private Boolean result;
-    private Date started_at;
-    private Date finished_at;
+    private Timestamp started_at;
+    private Timestamp finished_at;
     private Integer response_time_ms;
     private Integer test_origin;
 
@@ -55,19 +56,19 @@ public class InputRecord {
         this.result = result;
     }
 
-    public Date getStarted_at() {
+    public Timestamp getStarted_at() {
         return started_at;
     }
 
-    public void setStarted_at(Date started_at) {
+    public void setStarted_at(Timestamp started_at) {
         this.started_at = started_at;
     }
 
-    public Date getFinished_at() {
+    public Timestamp getFinished_at() {
         return finished_at;
     }
 
-    public void setFinished_at(Date finished_at) {
+    public void setFinished_at(Timestamp finished_at) {
         this.finished_at = finished_at;
     }
 
