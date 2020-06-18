@@ -2,14 +2,12 @@ package visa.SREIntern.init.controllers.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.server.ResponseStatusException;
 import visa.SREIntern.init.controllers.RelayController;
 import visa.SREIntern.init.domain.*;
 import org.json.*;
 import org.springframework.context.*;
-import visa.SREIntern.init.repositories.*;
+import visa.SREIntern.init.exceptions.CustomException;
 
 @Controller
 public class RelayControllerImpl implements RelayController {
@@ -46,8 +44,8 @@ public class RelayControllerImpl implements RelayController {
 
             return ("success");
         } catch(Exception exc){
-            System.out.println(exc.toString());
-            return null;
+            System.out.println("Message: " +exc.getMessage());
+            throw new CustomException(exc.getMessage());
         }
     }
 
@@ -68,9 +66,11 @@ public class RelayControllerImpl implements RelayController {
             }
 
             return ("success");
-        } catch(Exception exc){
-            System.out.println(exc.toString());
-            return null;
+        } catch(JSONException e){
+            System.out.println(e.toString());
+            CustomException exc = new CustomException(e.getMessage());
+            System.out.println(exc.getMessage());
+            throw exc;
         }
     }
 
