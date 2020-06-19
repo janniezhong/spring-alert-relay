@@ -7,20 +7,11 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 
-public class GIInput implements Input{
-
-    private final Integer test_origin = 2;
-
-    private String test_name;
-    private String test_run_id;
-    private Boolean result;
-    private Timestamp started_at;
-    private Timestamp finished_at;
-    private Integer response_time_ms;
-
-
+public class GIInput extends Input{
 
     public GIInput(JSONObject obj) throws JSONException{
+
+        test_origin = 2;
 
         JSONObject data = obj.getJSONObject("data");
         test_name = data.getString("name");
@@ -37,12 +28,6 @@ public class GIInput implements Input{
         finished_at = Timestamp.from(end_instant);
 
         response_time_ms = data.getInt("executionTime");
-
-    }
-
-    @Override
-    public void inputData(InputJDBCTemplate inputJDBCTemplate) {
-        inputJDBCTemplate.create(test_name, test_run_id, result, started_at, finished_at, response_time_ms, test_origin);
 
     }
 

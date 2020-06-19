@@ -28,13 +28,22 @@ public class RelayControllerImpl implements RelayController {
 
     @Override
     public String processRS(String input){
+        return process(input,"RUNSCOPE");
+    }
+
+    @Override
+    public String processGI(String input){
+        return process(input,"GHOST INSPECTOR");
+    }
+
+    private String process(String input, String inputType){
         try{
             System.out.println("Server up and running.");
 
             JSONObject obj = new JSONObject(input);
             System.out.println("JSONObject created successfully.");
-            Input imp = inputFactory.getInput("RUNSCOPE",obj);
-            System.out.println("Runscope object returned.");
+            Input imp = inputFactory.getInput(inputType,obj);
+            System.out.println("input object returned.");
 
             if (imp == null){
                 System.out.println("Houston, we have a problem");
@@ -48,36 +57,6 @@ public class RelayControllerImpl implements RelayController {
             throw new CustomException(exc.getMessage());
         }
     }
-
-    @Override
-    public String processGI(String input){
-        try{
-            System.out.println("Server up and running.");
-
-            JSONObject obj = new JSONObject(input);
-            System.out.println("JSONObject created successfully.");
-            Input imp = inputFactory.getInput("GHOST INSPECTOR",obj);
-            System.out.println("Ghost Inspector object returned.");
-
-            if (imp == null){
-                System.out.println("Houston, we have a problem");
-            } else {
-                imp.inputData(inputJDBCTemplate);
-            }
-
-            return ("success");
-        } catch(JSONException e){
-            System.out.println(e.toString());
-            CustomException exc = new CustomException(e.getMessage());
-            System.out.println(exc.getMessage());
-            throw exc;
-        }
-    }
-
-//    @GetMapping("/")
-//    public String init(Model model){
-//        return ("input");
-//    }
 
 
 

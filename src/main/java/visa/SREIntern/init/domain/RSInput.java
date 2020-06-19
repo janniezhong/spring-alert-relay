@@ -7,26 +7,24 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
 
-public class RSInput implements Input{
+public class RSInput extends Input{
 
-    private final Integer test_origin = 1;
-
-    private Timestamp finished_at;
+    //private Timestamp finished_at;
     //private Variables variables;
     private String agent;
     private String team_id;
-    private Boolean result;
+    //private Boolean result;
     private String team_name;
-    private Timestamp started_at;
+    //private Timestamp started_at;
     private String agent_expired;
     private String environment_uuid;
     private String environment_name;
     private String test_run_url;
-    private String test_run_id;
+    //private String test_run_id;
     private String bucket_key;
     private String region_name;
     private String bucket_name;
-    private String test_name;
+    //private String test_name;
     private String test_id;
     private String region;
     //private InitVariables initial_variables;
@@ -46,7 +44,7 @@ public class RSInput implements Input{
     private int scripts_total;
     private int scripts_pass;
     private String requests_method;
-    private int response_time_ms;
+    //private int response_time_ms;
     private int assertions_fail;
     private int assertions_total;
     private int assertions_pass;
@@ -56,6 +54,7 @@ public class RSInput implements Input{
 
     public RSInput(JSONObject obj) throws JSONException{
 
+        test_origin = 1;
 
         test_name = obj.getString("test_name");
         test_run_id = obj.getString("test_run_id");
@@ -117,14 +116,6 @@ public class RSInput implements Input{
         assertions_pass = assertions.getInt("pass");
 
     }
-
-    @Override
-    public void inputData(InputJDBCTemplate inputJDBCTemplate) {
-        inputJDBCTemplate.create(test_name, test_run_id, result, started_at, finished_at, response_time_ms, test_origin);
-
-    }
-
-
 
     public Timestamp getFinished_at() {
         return finished_at;
