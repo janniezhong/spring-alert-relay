@@ -11,23 +11,31 @@ public class GIInput extends Input{
 
     public GIInput(JSONObject obj) throws JSONException{
 
-        test_origin = 2;
+        super(obj.getJSONObject("data").getString("name"),
+                obj.getJSONObject("data").getString("_id"),
+                obj.getJSONObject("data").getBoolean("passing"),
+                Timestamp.from(Instant.parse(obj.getJSONObject("data").getString("dateExecutionStarted"))),
+                Timestamp.from(Instant.parse(obj.getJSONObject("data").getString("dateExecutionFinished"))),
+                obj.getJSONObject("data").getInt("executionTime"),
+                2);
 
-        JSONObject data = obj.getJSONObject("data");
-        test_name = data.getString("name");
-        test_run_id = data.getString("_id");
-        result =  data.getBoolean("passing");
-
-        String started = data.getString("dateExecutionStarted");
-        String finished = data.getString("dateExecutionFinished");
-
-        Instant start_instant = Instant.parse(started);
-        Instant end_instant = Instant.parse(finished);
-
-        started_at = Timestamp.from(start_instant);
-        finished_at = Timestamp.from(end_instant);
-
-        response_time_ms = data.getInt("executionTime");
+//        test_origin = 2;
+//
+//        JSONObject data = obj.getJSONObject("data");
+//        String name = data.getString("name");
+//        String id = data.getString("_id");
+//        Boolean result =  data.getBoolean("passing");
+//
+//        String started = data.getString("dateExecutionStarted");
+//        String finished = data.getString("dateExecutionFinished");
+//
+//        Instant start_instant = Instant.parse(started);
+//        Instant end_instant = Instant.parse(finished);
+//
+//        Timestamp startTime = Timestamp.from(start_instant);
+//        Timestamp endTime = Timestamp.from(end_instant);
+//
+//        Integer responseTime = data.getInt("executionTime");
 
     }
 

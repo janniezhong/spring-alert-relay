@@ -5,6 +5,7 @@ import org.json.*;
 import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 
 
 public class RSInput extends Input{
@@ -52,27 +53,34 @@ public class RSInput extends Input{
 
 
     public RSInput(JSONObject obj) throws JSONException{
+        super(obj.getString("test_name"),
+        obj.getString("test_run_id"),
+                evalResult(obj.getString("result")),
+                new Timestamp(obj.getLong("started_at")),
+                        new Timestamp(obj.getLong("finished_at")),
+                        obj.getJSONArray("requests").getJSONObject(0).getInt("response_time_ms"),
+                1);
 
-        test_origin = 1;
-
-        test_name = obj.getString("test_name");
-        test_run_id = obj.getString("test_run_id");
-        String result_String = obj.getString("result");
-        if (result_String.equalsIgnoreCase("pass")){
-            result = true;
-        } else {
-            result = false;
-        }
-        long started = obj.getLong("started_at");
-        long finished = obj.getLong("finished_at");
-
-        started_at = new Timestamp(started);
-        finished_at = new Timestamp(finished);
-
-        JSONArray requests = obj.getJSONArray("requests");
-        JSONObject request_content = requests.getJSONObject(0);
-        response_time_ms = request_content.getInt("response_time_ms");
-
+//        test_origin = 1;
+//
+//        test_name = obj.getString("test_name");
+//        test_run_id = obj.getString("test_run_id");
+//        String result_String = obj.getString("result");
+//        if (result_String.equalsIgnoreCase("pass")){
+//            result = true;
+//        } else {
+//            result = false;
+//        }
+//        long started = obj.getLong("started_at");
+//        long finished = obj.getLong("finished_at");
+//
+//        started_at = new Timestamp(started);
+//        finished_at = new Timestamp(finished);
+//
+//        JSONArray requests = obj.getJSONArray("requests");
+//        JSONObject request_content = requests.getJSONObject(0);
+//        response_time_ms = request_content.getInt("response_time_ms");
+//
 
 
 
@@ -114,6 +122,14 @@ public class RSInput extends Input{
 //        assertions_total = assertions.getInt("total");
 //        assertions_pass = assertions.getInt("pass");
 
+    }
+
+    public static Boolean evalResult(String result){
+        if (result.equalsIgnoreCase("pass")){
+            return true;
+        } else {
+            return false;
+        }
     }
 
 }
