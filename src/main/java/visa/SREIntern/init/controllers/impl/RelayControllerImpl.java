@@ -27,6 +27,11 @@ public class RelayControllerImpl implements RelayController {
     }
 
     @Override
+    public String test() {
+        return ("input");
+    }
+
+    @Override
     public String processRS(String input){
         return process(input,"RUNSCOPE");
     }

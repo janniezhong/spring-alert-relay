@@ -22,6 +22,7 @@ GRANT UPDATE ON ars_dev.* to 'ars_dev_user'@'%';
 
 
 #Create table
+use ars_dev;
 create table input (id bigint not null auto_increment, test_name varchar(255), test_run_id varchar(255), result BIT, started_at TIMESTAMP, finished_at TIMESTAMP, response_time_ms integer not null, test_origin integer not null, primary key (id));
 
 #Example Stored Procedure
