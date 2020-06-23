@@ -1,8 +1,13 @@
 package visa.SREIntern.init.domain;
 
-import java.sql.Timestamp;
-import java.util.Date;
+import visa.SREIntern.init.storage.InputJDBCTemplate;
 
+import java.sql.Timestamp;
+
+/**
+ * Abstract class representing any input payload.
+ * @author janniezhong
+ */
 public abstract class Input {
 
     String test_name;
@@ -13,6 +18,17 @@ public abstract class Input {
     Integer response_time_ms;
     Integer test_origin;
 
+
+    /**
+     * Creates an Input instance with all of the given parameters.
+     * @param test_name name of the test run.
+     * @param test_run_id id of the test run.
+     * @param result the result of the test run.
+     * @param started_at timestamp at which the test run began.
+     * @param finished_at timestamp at which the test run ended.
+     * @param response_time_ms duration of the test, in milliseconds.
+     * @param test_origin integer representing which alert service this input came from. (1 - Runscope, 2 - Ghost Inspector)
+     */
     public Input(String test_name, String test_run_id, Boolean result, Timestamp started_at, Timestamp finished_at, Integer response_time_ms, Integer test_origin){
         this.test_name = test_name;
         this.test_run_id = test_run_id;
@@ -23,6 +39,10 @@ public abstract class Input {
         this.test_origin = test_origin;
     }
 
+    /**
+     * Inputs given data into {@link InputJDBCTemplate}
+     * @param inputJDBCTemplate template in which to insert this class' data.
+     */
     public void inputData(InputJDBCTemplate inputJDBCTemplate) {
         inputJDBCTemplate.create(test_name, test_run_id, result, started_at, finished_at, response_time_ms, test_origin);
 

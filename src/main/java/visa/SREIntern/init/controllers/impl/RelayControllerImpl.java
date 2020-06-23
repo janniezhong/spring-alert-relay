@@ -8,6 +8,8 @@ import visa.SREIntern.init.domain.*;
 import org.json.*;
 import org.springframework.context.*;
 import visa.SREIntern.init.exceptions.CustomException;
+import visa.SREIntern.init.storage.InputJDBCTemplate;
+import visa.SREIntern.init.storage.InputRecord;
 
 @Controller
 public class RelayControllerImpl implements RelayController {
@@ -17,18 +19,12 @@ public class RelayControllerImpl implements RelayController {
     ApplicationContext context;
     InputJDBCTemplate inputJDBCTemplate;
 
-
     @Autowired
     public RelayControllerImpl(InputRecord inputRepo, InputFactory inputFactory) {
         this.inputRepo = inputRepo;
         this.inputFactory = inputFactory;
         context = new ClassPathXmlApplicationContext("Beans.xml");
         inputJDBCTemplate = (InputJDBCTemplate)context.getBean("inputJDBCTemplate");
-    }
-
-    @Override
-    public String test() {
-        return ("input");
     }
 
     @Override
@@ -41,6 +37,13 @@ public class RelayControllerImpl implements RelayController {
         return process(input,"GHOST INSPECTOR");
     }
 
+    /**
+     * Private method to convert input strings into their respective classes.
+     * @param input the input String that was POSTed.
+     * @param inputType the alert service the input came from (Runscope, Ghost Inspector, etc). Must match the strings in {@link visa.SREIntern.init.domain.InputFactory}
+     * @return the String that links to a static html page to display.
+     * @throws CustomException if input string is of the incorrect format.
+     */
     private String process(String input, String inputType){
         try{
             System.out.println("Server up and running.");

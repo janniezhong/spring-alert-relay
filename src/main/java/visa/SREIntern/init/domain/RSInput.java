@@ -3,11 +3,12 @@ package visa.SREIntern.init.domain;
 import org.json.*;
 
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
 
 
+/**
+ * Represents a Runscope payload.
+ * @author janniezhong
+ */
 public class RSInput extends Input{
 
 //    //private Timestamp finished_at;
@@ -50,15 +51,18 @@ public class RSInput extends Input{
 //    private int assertions_total;
 //    private int assertions_pass;
 
-
-
+    /**
+     * Creates an RSInput instance with the data given.
+     * @param obj the JSON object created from the input String.
+     * @throws JSONException when the JSON object does not contain the appropriate data fields or is formatted incorrectly.
+     */
     public RSInput(JSONObject obj) throws JSONException{
         super(obj.getString("test_name"),
-        obj.getString("test_run_id"),
+                obj.getString("test_run_id"),
                 evalResult(obj.getString("result")),
                 new Timestamp(obj.getLong("started_at")),
-                        new Timestamp(obj.getLong("finished_at")),
-                        obj.getJSONArray("requests").getJSONObject(0).getInt("response_time_ms"),
+                new Timestamp(obj.getLong("finished_at")),
+                obj.getJSONArray("requests").getJSONObject(0).getInt("response_time_ms"),
                 1);
 
 //        test_origin = 1;
@@ -124,7 +128,12 @@ public class RSInput extends Input{
 
     }
 
-    public static Boolean evalResult(String result){
+    /**
+     * Converts a String into a boolean, dependent on the content of the String.
+     * @param result String from the JSON payload to be evaluated.
+     * @return a Boolean representing the input String.
+     */
+    private static Boolean evalResult(String result){
         if (result.equalsIgnoreCase("pass")){
             return true;
         } else {

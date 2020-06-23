@@ -1,4 +1,4 @@
-package visa.SREIntern.init.domain;
+package visa.SREIntern.init.storage;
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
@@ -9,13 +9,18 @@ import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import visa.SREIntern.init.mappers.InputMapper;
-import visa.SREIntern.init.repositories.InputRecordDAO;
 
+/**
+ * Represents a template to interact with the database.
+ */
 public class InputJDBCTemplate implements InputRecordDAO {
     private DataSource dataSource;
     private SimpleJdbcCall jdbcCall;
     private  JdbcTemplate jdbcTemplateObject;
 
+    /**
+     * @param dataSource the DataSource to interact with.
+     */
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
         this.jdbcCall =  new SimpleJdbcCall(dataSource).withProcedureName("getRecord");

@@ -7,8 +7,17 @@ import java.sql.Timestamp;
 import java.time.Instant;
 import java.time.LocalDateTime;
 
+/**
+ * Represents a Ghost Inspector payload.
+ * @author janniezhong
+ */
 public class GIInput extends Input{
 
+    /**
+     * Creates an GIInput instance with the data given.
+     * @param obj the JSON object created from the input String.
+     * @throws JSONException when the JSON object does not contain the appropriate data fields or is formatted incorrectly.
+     */
     public GIInput(JSONObject obj) throws JSONException{
 
         super(obj.getJSONObject("data").getString("name"),

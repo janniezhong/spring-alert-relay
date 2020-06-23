@@ -5,8 +5,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
-import visa.SREIntern.init.domain.InputRecord;
+import visa.SREIntern.init.storage.InputRecord;
 
+/**
+ * Maps a MySQL row to an InputRecord object.
+ */
 public class InputMapper implements RowMapper<InputRecord>{
 
     @Override

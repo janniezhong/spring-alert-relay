@@ -14,7 +14,7 @@
 
     <!-- Definition for studentJDBCTemplate bean -->
     <bean id = "inputJDBCTemplate"
-          class = "visa.SREIntern.init.domain.InputJDBCTemplate">
+          class = "visa.SREIntern.init.storage.InputJDBCTemplate">
         <property name = "dataSource" ref = "dataSource" />
     </bean>
 </beans>

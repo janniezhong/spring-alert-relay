@@ -1,10 +1,12 @@
-package visa.SREIntern.init.domain;
+package visa.SREIntern.init.storage;
 
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 
-
+/**
+ * Represents a row of data in the MySQL database.
+ */
 @Component
 public class InputRecord {
     private Integer id;
