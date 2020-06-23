@@ -20,15 +20,15 @@ And complete! You've added your own endpoint to this server.
 ### To Dockerize
 
 Before containerizing, confirm that the "Beans.xml" file has the correct URL address for the MySQL database that you're running (localhost, 172.17.0.2). If the database is on another container in docker, run 
-
-> docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}’ [container_name]
-
+```
+docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}’ [container_name]
+```
 to find the IP address.
 
 Then run
-
->mvn clean package
->docker build -t spring-alert-relay .
->docker run -p 8080:8080 spring-alert-relay
-
+```
+mvn clean package
+docker build -t spring-alert-relay .
+docker run -p 8080:8080 spring-alert-relay
+```
 in command line, and you now have a container in Docker running this server!
