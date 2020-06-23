@@ -1,6 +1,6 @@
 # spring-alert-relay
 
-This project creates a server that takes webhook responses from alert services (such as Runscope, or Ghost Inspector) and consolidates them in a database (as for easier displaying and monitoring in Grafana).
+This project creates a server that takes webhook responses from alert services (such as Runscope, or Ghost Inspector) and consolidates them in a database (i.e. for easier displaying and monitoring in Grafana).
 
 
 ### To Run:
