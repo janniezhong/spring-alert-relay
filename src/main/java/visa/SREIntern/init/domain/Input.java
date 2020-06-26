@@ -27,7 +27,7 @@ public abstract class Input {
     }
 
     /**
-     *
+     * Creates an instance of the Input class with the given parameters.
      * @param alert_id
      * @param category
      * @param component

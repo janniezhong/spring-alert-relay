@@ -13,15 +13,12 @@ import visa.SREIntern.init.storage.InputRecord;
 
 @Controller
 public class RelayControllerImpl implements RelayController {
-
-    private InputRecord inputRepo;
     private InputFactory inputFactory;
     ApplicationContext context;
     InputJDBCTemplate inputJDBCTemplate;
 
     @Autowired
-    public RelayControllerImpl(InputRecord inputRepo, InputFactory inputFactory) {
-        this.inputRepo = inputRepo;
+    public RelayControllerImpl(InputFactory inputFactory) {
         this.inputFactory = inputFactory;
         context = new ClassPathXmlApplicationContext("Beans.xml");
         inputJDBCTemplate = (InputJDBCTemplate)context.getBean("inputJDBCTemplate");

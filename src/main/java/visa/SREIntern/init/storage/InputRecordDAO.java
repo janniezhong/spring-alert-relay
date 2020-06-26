@@ -16,6 +16,15 @@ public interface InputRecordDAO {
 
     /**
      * Creates a record in the Input table.
+     * @param alert_id
+     * @param category
+     * @param component
+     * @param priority
+     * @param alert_source
+     * @param alert_time
+     * @param alert_title
+     * @param results_link
+     * @param error_count
      */
     void create(Long alert_id,
                 String category,

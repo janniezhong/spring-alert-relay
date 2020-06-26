@@ -27,31 +27,6 @@ GRANT ALL ON ars_dev.RP_INST_ALERT to 'ars_dev_user'@'%';
 
 use ars_dev;
 
-
-#Create table
-create table input (id bigint not null auto_increment, test_name varchar(255), test_run_id varchar(255), result BIT, started_at TIMESTAMP, finished_at TIMESTAMP, response_time_ms integer not null, test_origin integer not null, primary key (id));
-
-#Example Stored Procedure
-DELIMITER $$
-
-DROP PROCEDURE IF EXISTS `ars_dev`.`getRecord` $$
-CREATE PROCEDURE `ars_dev`.`getRecord` (
-    IN in_id INTEGER,
-    OUT out_name VARCHAR(255),
-    OUT out_result BIT,
-    OUT out_time INTEGER
-    )
-BEGIN
-    SELECT test_name, result, response_time_ms
-    INTO out_name, out_result, out_time
-    FROM input where id = in_id;
-END $$
-DELIMITER ;
-
-
-
-
-
 CREATE TABLE alert (
     `ALERT_ID` bigint(16) NOT NULL,
     `CATEGORY` varchar(100) COLLATE utf8_bin NOT NULL,
