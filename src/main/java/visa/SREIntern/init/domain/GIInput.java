@@ -1,5 +1,6 @@
 package visa.SREIntern.init.domain;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -20,16 +21,38 @@ public class GIInput extends Input{
      */
     public GIInput(JSONObject obj) throws JSONException{
 
-        super(obj.getJSONObject("data").getString("name"),
-                obj.getJSONObject("data").getString("_id"),
-                obj.getJSONObject("data").getBoolean("passing"),
-                Timestamp.from(Instant.parse(obj.getJSONObject("data").getString("dateExecutionStarted"))),
-                Timestamp.from(Instant.parse(obj.getJSONObject("data").getString("dateExecutionFinished"))),
-                obj.getJSONObject("data").getInt("executionTime"),
-                2);
+        super();
+        JSONObject data = obj.getJSONObject("data");
 
-//        test_origin = 2;
-//
+        //alert_id
+        setAlert_id((long)1234567890);
+
+        //category + component - set in RelayControllerImpl
+
+        //String priority
+        setPriority("P3");
+
+        //alert_source
+        setAlert_source("Ghost Inspector");
+
+        //alert_time
+        String finished = data.getString("dateExecutionFinished");
+        Instant end_instant = Instant.parse(finished);
+        Timestamp endTime = Timestamp.from(end_instant);
+        setAlert_time(endTime);
+
+        //alert_title
+        setAlert_title(data.getString("name"));
+
+        //results_link
+        setResults_link(data.getString("endUrl"));
+
+        //error_count
+        Boolean result =  data.getBoolean("passing");
+        setError_count(evalResult(result));
+
+
+
 //        JSONObject data = obj.getJSONObject("data");
 //        String name = data.getString("name");
 //        String id = data.getString("_id");
@@ -46,6 +69,13 @@ public class GIInput extends Input{
 //
 //        Integer responseTime = data.getInt("executionTime");
 
+    }
+    private static Double evalResult(Boolean result){
+        if (result){
+            return 0.0;
+        } else {
+            return 1.0;
+        }
     }
 
 }

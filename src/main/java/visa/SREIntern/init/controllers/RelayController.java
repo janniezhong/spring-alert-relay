@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 
 
 /**
@@ -18,7 +19,7 @@ public interface RelayController {
      * @return the String that links to a static html page to display.
      */
     @PostMapping("/runscope")
-    String processRS(@RequestBody String input);
+    String processRS(@RequestBody String input, @RequestHeader("Category") String category, @RequestHeader("Component") String component);
 
     /**
      * Posts the JSON payload to be processed as a Ghost Inspector input.
@@ -26,6 +27,6 @@ public interface RelayController {
      * @return the String that links to a static html page to display.
      */
     @PostMapping("/ghostinspector")
-    String processGI(@RequestBody String input);
+    String processGI(@RequestBody String input, @RequestHeader("Category") String category, @RequestHeader("Component") String component);
 
 }

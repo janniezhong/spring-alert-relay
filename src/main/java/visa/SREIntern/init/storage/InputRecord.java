@@ -2,83 +2,93 @@ package visa.SREIntern.init.storage;
 
 import org.springframework.stereotype.Component;
 
-import java.sql.Timestamp;
+import java.sql.*;
 
 /**
  * Represents a row of data in the MySQL database.
  */
 @Component
 public class InputRecord {
-    private Integer id;
-    private String test_name;
-    private String test_run_id;
-    private Boolean result;
-    private Timestamp started_at;
-    private Timestamp finished_at;
-    private Integer response_time_ms;
-    private Integer test_origin;
+    private Long alert_id;
+    private String category;
+    private String component;
+    private String priority;
+    private String alert_source;
+    private Timestamp alert_time;
+    private String alert_title;
+    private String results_link;
+    private Double error_count;
 
-    public Integer getTest_origin() {
-        return test_origin;
+    public Long getAlert_id() {
+        return alert_id;
     }
 
-    public void setTest_origin(Integer test_origin) {
-        this.test_origin = test_origin;
+    public void setAlert_id(Long alert_id) {
+        this.alert_id = alert_id;
     }
 
-    public Integer getId() {
-        return id;
+    public String getCategory() {
+        return category;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public String getTest_name() {
-        return test_name;
+    public String getComponent() {
+        return component;
     }
 
-    public void setTest_name(String test_name) {
-        this.test_name = test_name;
+    public void setComponent(String component) {
+        this.component = component;
     }
 
-    public String getTest_run_id() {
-        return test_run_id;
+    public String getPriority() {
+        return priority;
     }
 
-    public void setTest_run_id(String test_run_id) {
-        this.test_run_id = test_run_id;
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
-    public Boolean getResult() {
-        return result;
+    public String getAlert_source() {
+        return alert_source;
     }
 
-    public void setResult(Boolean result) {
-        this.result = result;
+    public void setAlert_source(String alert_source) {
+        this.alert_source = alert_source;
     }
 
-    public Timestamp getStarted_at() {
-        return started_at;
+    public Timestamp getAlert_time() {
+        return alert_time;
     }
 
-    public void setStarted_at(Timestamp started_at) {
-        this.started_at = started_at;
+    public void setAlert_time(Timestamp alert_time) {
+        this.alert_time = alert_time;
     }
 
-    public Timestamp getFinished_at() {
-        return finished_at;
+    public String getAlert_title() {
+        return alert_title;
     }
 
-    public void setFinished_at(Timestamp finished_at) {
-        this.finished_at = finished_at;
+    public void setAlert_title(String alert_title) {
+        this.alert_title = alert_title;
     }
 
-    public Integer getResponse_time_ms() {
-        return response_time_ms;
+    public String getResults_link() {
+        return results_link;
     }
 
-    public void setResponse_time_ms(Integer response_time_ms) {
-        this.response_time_ms = response_time_ms;
+    public void setResults_link(String results_link) {
+        this.results_link = results_link;
     }
+
+    public Double getError_count() {
+        return error_count;
+    }
+
+    public void setError_count(Double error_count) {
+        this.error_count = error_count;
+    }
+
 }

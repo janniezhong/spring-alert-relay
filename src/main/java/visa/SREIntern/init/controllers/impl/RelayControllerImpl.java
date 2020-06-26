@@ -28,13 +28,13 @@ public class RelayControllerImpl implements RelayController {
     }
 
     @Override
-    public String processRS(String input){
-        return process(input,"RUNSCOPE");
+    public String processRS(String input, String category, String component) {
+        return process(input, category, component, "RUNSCOPE");
     }
 
     @Override
-    public String processGI(String input){
-        return process(input,"GHOST INSPECTOR");
+    public String processGI(String input, String category, String component) {
+        return process(input, category, component, "GHOST INSPECTOR");
     }
 
     /**
@@ -44,7 +44,7 @@ public class RelayControllerImpl implements RelayController {
      * @return the String that links to a static html page to display.
      * @throws CustomException if input string is of the incorrect format.
      */
-    private String process(String input, String inputType){
+    private String process(String input, String category, String component, String inputType){
         try{
             System.out.println("Server up and running.");
 
@@ -56,6 +56,9 @@ public class RelayControllerImpl implements RelayController {
             if (imp == null){
                 System.out.println("Houston, we have a problem");
             } else {
+                imp.setCategory(category);
+                imp.setComponent(component);
+                System.out.println(imp);
                 imp.inputData(inputJDBCTemplate);
             }
 
@@ -65,11 +68,4 @@ public class RelayControllerImpl implements RelayController {
             throw new CustomException(exc.getMessage());
         }
     }
-
-
-
-
-
-
-
 }

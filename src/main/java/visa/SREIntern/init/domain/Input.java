@@ -10,33 +10,44 @@ import java.sql.Timestamp;
  */
 public abstract class Input {
 
-    String test_name;
-    String test_run_id;
-    Boolean result;
-    Timestamp started_at;
-    Timestamp finished_at;
-    Integer response_time_ms;
-    Integer test_origin;
-
+    private Long alert_id;
+    private String category;
+    private String component;
+    private String priority;
+    private String alert_source;
+    private Timestamp alert_time;
+    private String alert_title;
+    private String results_link;
+    private Double error_count;
 
     /**
-     * Creates an Input instance with all of the given parameters.
-     * @param test_name name of the test run.
-     * @param test_run_id id of the test run.
-     * @param result the result of the test run.
-     * @param started_at timestamp at which the test run began.
-     * @param finished_at timestamp at which the test run ended.
-     * @param response_time_ms duration of the test, in milliseconds.
-     * @param test_origin integer representing which alert service this input came from. (1 - Runscope, 2 - Ghost Inspector)
+     * Constructs an empty instance of the Input class.
      */
-    public Input(String test_name, String test_run_id, Boolean result, Timestamp started_at, Timestamp finished_at, Integer response_time_ms, Integer test_origin){
-        this.test_name = test_name;
-        this.test_run_id = test_run_id;
-        this.result = result;
-        this.started_at = started_at;
-        this.finished_at = finished_at;
-        this.response_time_ms = response_time_ms;
-        this.test_origin = test_origin;
+    public Input() {
+    }
+
+    /**
+     *
+     * @param alert_id
+     * @param category
+     * @param component
+     * @param priority
+     * @param alert_source
+     * @param alert_time
+     * @param alert_title
+     * @param results_link
+     * @param error_count
+     */
+    public Input(Long alert_id, String category, String component, String priority, String alert_source, Timestamp alert_time, String alert_title, String results_link, Double error_count) {
+        this.alert_id = alert_id;
+        this.category = category;
+        this.component = component;
+        this.priority = priority;
+        this.alert_source = alert_source;
+        this.alert_time = alert_time;
+        this.alert_title = alert_title;
+        this.results_link = results_link;
+        this.error_count = error_count;
     }
 
     /**
@@ -44,55 +55,102 @@ public abstract class Input {
      * @param inputJDBCTemplate template in which to insert this class' data.
      */
     public void inputData(InputJDBCTemplate inputJDBCTemplate) {
-        inputJDBCTemplate.create(test_name, test_run_id, result, started_at, finished_at, response_time_ms, test_origin);
+        inputJDBCTemplate.create(alert_id,
+                category,
+                component,
+                priority,
+                alert_source,
+                alert_time,
+                alert_title,
+                results_link,
+                error_count);
 
     }
 
-    public String getTest_name() {
-        return test_name;
+    public Long getAlert_id() {
+        return alert_id;
     }
 
-    public void setTest_name(String test_name) {
-        this.test_name = test_name;
+    public void setAlert_id(Long alert_id) {
+        this.alert_id = alert_id;
     }
 
-    public String getTest_run_id() {
-        return test_run_id;
+    public String getCategory() {
+        return category;
     }
 
-    public void setTest_run_id(String test_run_id) {
-        this.test_run_id = test_run_id;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public Boolean getResult() {
-        return result;
+    public String getComponent() {
+        return component;
     }
 
-    public void setResult(Boolean result) {
-        this.result = result;
+    public void setComponent(String component) {
+        this.component = component;
     }
 
-    public Timestamp getStarted_at() {
-        return started_at;
+    public String getPriority() {
+        return priority;
     }
 
-    public void setStarted_at(Timestamp started_at) {
-        this.started_at = started_at;
+    public void setPriority(String priority) {
+        this.priority = priority;
     }
 
-    public Timestamp getFinished_at() {
-        return finished_at;
+    public String getAlert_source() {
+        return alert_source;
     }
 
-    public void setFinished_at(Timestamp finished_at) {
-        this.finished_at = finished_at;
+    public void setAlert_source(String alert_source) {
+        this.alert_source = alert_source;
     }
 
-    public Integer getResponse_time_ms() {
-        return response_time_ms;
+    public Timestamp getAlert_time() {
+        return alert_time;
     }
 
-    public void setResponse_time_ms(Integer response_time_ms) {
-        this.response_time_ms = response_time_ms;
+    public void setAlert_time(Timestamp alert_time) {
+        this.alert_time = alert_time;
+    }
+
+    public String getAlert_title() {
+        return alert_title;
+    }
+
+    public void setAlert_title(String alert_title) {
+        this.alert_title = alert_title;
+    }
+
+    public String getResults_link() {
+        return results_link;
+    }
+
+    public void setResults_link(String results_link) {
+        this.results_link = results_link;
+    }
+
+    public Double getError_count() {
+        return error_count;
+    }
+
+    public void setError_count(Double error_count) {
+        this.error_count = error_count;
+    }
+
+    @Override
+    public String toString() {
+        return "Input{" +
+                "alert_id=" + alert_id +
+                ", category='" + category + '\'' +
+                ", component='" + component + '\'' +
+                ", priority='" + priority + '\'' +
+                ", alert_source='" + alert_source + '\'' +
+                ", alert_time=" + alert_time +
+                ", alert_title='" + alert_title + '\'' +
+                ", results_link='" + results_link + '\'' +
+                ", error_count=" + error_count +
+                '}';
     }
 }

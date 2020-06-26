@@ -17,15 +17,24 @@ public interface InputRecordDAO {
     /**
      * Creates a record in the Input table.
      */
-    void create(String test_name, String test_run_id, Boolean result, Timestamp started_at, Timestamp finished_at, Integer response_time_ms, Integer test_origin);
+    void create(Long alert_id,
+                String category,
+                String component,
+                String priority,
+                String alert_source,
+                Timestamp alert_time,
+                String alert_title,
+                String results_link,
+                Double error_count
+        );
 
-    /**
-     * Lists a record from the Input table corresponding to a passed Input id.
-     */
-    InputRecord getRecord(Integer id);
-
-    /**
-     * Lists all the records from the Input table.
-     */
-    List<InputRecord> listRecords();
+//    /**
+//     * Lists a record from the Input table corresponding to a passed Input id.
+//     */
+//    InputRecord getRecord(Integer id);
+//
+//    /**
+//     * Lists all the records from the Input table.
+//     */
+//    List<InputRecord> listRecords();
 }

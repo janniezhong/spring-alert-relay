@@ -51,22 +51,51 @@ public class RSInput extends Input{
 //    private int assertions_total;
 //    private int assertions_pass;
 
+    private int totalNumTests;
+    private int errorCount;
+
     /**
      * Creates an RSInput instance with the data given.
      * @param obj the JSON object created from the input String.
      * @throws JSONException when the JSON object does not contain the appropriate data fields or is formatted incorrectly.
      */
     public RSInput(JSONObject obj) throws JSONException{
-        super(obj.getString("test_name"),
-                obj.getString("test_run_id"),
-                evalResult(obj.getString("result")),
-                new Timestamp(obj.getLong("started_at")),
-                new Timestamp(obj.getLong("finished_at")),
-                obj.getJSONArray("requests").getJSONObject(0).getInt("response_time_ms"),
-                1);
+        super();
 
-//        test_origin = 1;
-//
+        //alert_id
+        setAlert_id((long)123456789);
+
+        //category + component - set in RelayControllerImpl
+
+        //String priority
+        JSONArray requests = obj.getJSONArray("requests");
+        JSONObject request_content = requests.getJSONObject(0);
+        JSONObject requests_variables = request_content.getJSONObject("variables");
+        JSONObject scripts = request_content.getJSONObject("scripts");
+        JSONObject assertions = request_content.getJSONObject("assertions");
+        totalNumTests = requests_variables.getInt("total") + scripts.getInt("total") + assertions.getInt("total");
+        errorCount = requests_variables.getInt("fail") + scripts.getInt("fail") + assertions.getInt("fail");
+
+        setPriority(calcPriority());
+
+        //alert_source
+        setAlert_source("Runscope");
+
+        //alert_time
+        long finished = obj.getLong("finished_at");
+        setAlert_time(new Timestamp(finished));
+
+        //alert_title
+        setAlert_title(obj.getString("test_name"));
+
+        //results_link
+        setResults_link(obj.getString("test_run_url"));
+
+        //error_count
+        setError_count((double)errorCount);
+
+
+
 //        test_name = obj.getString("test_name");
 //        test_run_id = obj.getString("test_run_id");
 //        String result_String = obj.getString("result");
@@ -140,5 +169,24 @@ public class RSInput extends Input{
             return false;
         }
     }
+
+    private String calcPriority(){
+        double ratio = (double)errorCount/(double)totalNumTests;
+
+        if(totalNumTests == 0 || ratio == 0) {
+            return "P5";
+        }else if (ratio <= 0.2){
+            return "P4";
+        }else if (ratio <= 0.3){
+            return "P3";
+        }else if (ratio <= 0.6){
+            return "P2";
+        } else {
+            return "P1";
+        }
+
+        // include a situation where error > total count?
+    }
+
 
 }
