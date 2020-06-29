@@ -3,6 +3,7 @@ package visa.SREIntern.init.domain;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import visa.SREIntern.init.generators.IdGenerator;
 
 import java.sql.Timestamp;
 import java.time.Instant;
@@ -13,6 +14,8 @@ import java.time.LocalDateTime;
  * @author janniezhong
  */
 public class GIInput extends Input{
+
+    private int errorCount;
 
     /**
      * Creates an GIInput instance with the data given.
@@ -25,30 +28,37 @@ public class GIInput extends Input{
         JSONObject data = obj.getJSONObject("data");
 
         //alert_id
-        setAlert_id((long)1234567890);
+        setAlert_id(IdGenerator.INSTANCE.generateNewId());
 
         //category + component - set in RelayControllerImpl
 
         //String priority
-        setPriority("P3");
+        Boolean result =  data.getBoolean("passing");
+        if (result){
+            setPriority("P5");
+        } else {
+            setPriority("P3");
+        }
 
         //alert_source
         setAlert_source("Ghost Inspector");
 
         //alert_time
-        String finished = data.getString("dateExecutionFinished");
-        Instant end_instant = Instant.parse(finished);
-        Timestamp endTime = Timestamp.from(end_instant);
-        setAlert_time(endTime);
+        String started = data.getString("dateExecutionStarted");
+        Instant start_instant = Instant.parse(started);
+        Timestamp startTime = Timestamp.from(start_instant);
+        setAlert_time(startTime);
 
         //alert_title
         setAlert_title(data.getString("name"));
 
         //results_link
-        setResults_link(data.getString("endUrl"));
+        JSONObject screenshot = data.getJSONObject("screenshot");
+        JSONObject original = screenshot.getJSONObject("original");
+        String results_link = original.getString("defaultUrl");
+        setResults_link(results_link);
 
         //error_count
-        Boolean result =  data.getBoolean("passing");
         setError_count(evalResult(result));
 
 

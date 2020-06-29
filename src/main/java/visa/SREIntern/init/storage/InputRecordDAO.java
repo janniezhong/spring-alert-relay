@@ -2,6 +2,7 @@ package visa.SREIntern.init.storage;
 
 
 import javax.sql.DataSource;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -16,17 +17,17 @@ public interface InputRecordDAO {
 
     /**
      * Creates a record in the Input table.
-     * @param alert_id
-     * @param category
-     * @param component
-     * @param priority
-     * @param alert_source
-     * @param alert_time
-     * @param alert_title
-     * @param results_link
-     * @param error_count
+     * @param alert_id the id of the alert in the table. Also the primary key.
+     * @param category the category to which this alert belongs to.
+     * @param component the component that this alert came from.
+     * @param priority the priority this alert holds.
+     * @param alert_source the alert source.
+     * @param alert_time the time this alert was triggered.
+     * @param alert_title the name of this alert.
+     * @param results_link the link to access alert results.
+     * @param error_count the error count in this particular alert.
      */
-    void create(Long alert_id,
+    void create(BigInteger alert_id,
                 String category,
                 String component,
                 String priority,
@@ -37,13 +38,4 @@ public interface InputRecordDAO {
                 Double error_count
         );
 
-//    /**
-//     * Lists a record from the Input table corresponding to a passed Input id.
-//     */
-//    InputRecord getRecord(Integer id);
-//
-//    /**
-//     * Lists all the records from the Input table.
-//     */
-//    List<InputRecord> listRecords();
 }

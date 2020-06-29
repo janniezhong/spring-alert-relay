@@ -1,4 +1,5 @@
 package visa.SREIntern.init.storage;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.text.SimpleDateFormat;
@@ -26,7 +27,9 @@ public class InputJDBCTemplate implements InputRecordDAO {
     private  JdbcTemplate jdbcTemplateObject;
 
     /**
+     * Method to set the data source of this template.
      * @param dataSource the DataSource to interact with.
+     * Also sets the jdbcCall variable to have access to a certain stored procedure.
      */
     public void setDataSource(DataSource dataSource) {
         this.dataSource = dataSource;
@@ -51,7 +54,7 @@ public class InputJDBCTemplate implements InputRecordDAO {
     }
 
     @Override
-    public void create(Long alert_id,
+    public void create(BigInteger alert_id,
                        String category,
                        String component,
                        String priority,
@@ -60,15 +63,6 @@ public class InputJDBCTemplate implements InputRecordDAO {
                        String alert_title,
                        String results_link,
                        Double error_count) {
-
-//        try {
-//            InputProcedure inputProcedure = new InputProcedure(dataSource, "RP_INST_ALERT");
-//            inputProcedure.execute(alert_id, category, component, priority, alert_source, alert_time, alert_title, results_link, error_count);
-//        } catch(Exception e){
-//            System.out.println(e);
-//        }
-
-
 
         SqlParameterSource in = new MapSqlParameterSource()
                 .addValue("v_alert_id", alert_id)
@@ -86,97 +80,7 @@ public class InputJDBCTemplate implements InputRecordDAO {
         String err_msg = (String) out.get("ERR_MSG");
         System.out.println("Return code: " + return_code + ", error message: " + err_msg);
 
-//        jdbcTemplateObject = new JdbcTemplate(dataSource);
-//        String SQL = "insert into input (test_name, test_run_id, result, started_at, finished_at, response_time_ms, test_origin) values (?, ?, ?, ?, ?, ?, ?)";
-//
-//        jdbcTemplateObject.update( SQL, test_name, test_run_id, result, started_at, finished_at, response_time_ms, test_origin);
-//        System.out.println("Created Record Test Name = " + test_name + " Result = " + result + ", Start Time = " + started_at + ", End Time = " + finished_at + ", Response Time = " + response_time_ms + ", Test Type = " + test_origin);
-//        return;
     }
-
-//    class InputProcedure extends StoredProcedure {
-//        public InputProcedure(DataSource dataSource, String procedureName) {
-//            super(dataSource,procedureName);
-//
-//            declareParameter(new SqlParameter("v_alert_id", Types.BIGINT));
-//            declareParameter(new SqlParameter("v_category", Types.VARCHAR));
-//            declareParameter(new SqlParameter("v_component", Types.VARCHAR));
-//            declareParameter(new SqlParameter("v_priority", Types.VARCHAR));
-//            declareParameter(new SqlParameter("v_source", Types.VARCHAR));
-//            declareParameter(new SqlParameter("v_alert_time", Types.TIMESTAMP));
-//            declareParameter(new SqlParameter("v_title", Types.VARCHAR));
-//            declareParameter(new SqlParameter("v_link", Types.VARCHAR));
-//            declareParameter(new SqlParameter("v_result_count", Types.DOUBLE));
-//            compile();
-//        }
-//        public void execute(Long alert_id,
-//                            String category,
-//                            String component,
-//                            String priority,
-//                            String alert_source,
-//                            Timestamp alert_time,
-//                            String alert_title,
-//                            String results_link,
-//                            Double error_count){
-////            SqlParameterSource in = new MapSqlParameterSource()
-////                    .addValue("v_alert_id", alert_id)
-////                    .addValue("v_category", category)
-////                    .addValue("v_component", component)
-////                    .addValue("v_priority", priority)
-////                    .addValue("v_source", alert_source)
-////                    .addValue("v_alert_time", alert_time)
-////                    .addValue("v_title", alert_title)
-////                    .addValue("v_link", results_link)
-////                    .addValue("v_result_count", error_count);
-//
-//            Map<String, Object> in = new HashMap<>();
-//            in.put("v_alert_id", alert_id);
-//            in.put("v_category", category);
-//            in.put("v_component", component);
-//            in.put("v_priority", priority);
-//            in.put("v_source", alert_source);
-//            in.put("v_alert_time", alert_time);
-//            in.put("v_title", alert_title);
-//            in.put("v_link", results_link);
-//            in.put("v_result_count", error_count);
-//
-//            Map<String, Object> out = super.execute(in);
-//            int return_code = (int) out.get("RETURN_CODE");
-//            String err_msg = (String) out.get("ERR_MSG");
-//            System.out.println("Return code: " + return_code + ", error message: " + err_msg);
-//
-//        }
-//    }
-
-
-
-
-//    @Override
-//    public InputRecord getRecord(Integer id) {
-//
-//        SqlParameterSource in = new MapSqlParameterSource().addValue("in_id", id);
-//        Map<String, Object> out = jdbcCall.execute(in);
-//
-//
-//        InputRecord input = new InputRecord();
-//        input.setId(id);
-//        input.setTest_name((String) out.get("test_name"));
-//        input.setTest_run_id((String) out.get("test_run_id"));
-//        input.setResult((Boolean) out.get("result"));
-//        input.setStarted_at((Timestamp) out.get("started_at"));
-//        input.setFinished_at((Timestamp) out.get("finished_at"));
-//        input.setResponse_time_ms((Integer) out.get("response_time_ms"));
-//        input.setTest_origin((Integer) out.get("test_origin"));
-//        return input;
-//
-//    }
-//
-//    @Override
-//    public List<InputRecord> listRecords() {
-//        String SQL = "select * from Input";
-//        List <InputRecord> records = jdbcTemplateObject.query(SQL, new InputMapper());
-//        return records;
-//    }
 
 
 }

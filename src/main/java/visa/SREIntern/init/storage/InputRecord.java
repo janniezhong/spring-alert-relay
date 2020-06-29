@@ -2,6 +2,7 @@ package visa.SREIntern.init.storage;
 
 import org.springframework.stereotype.Component;
 
+import java.math.BigInteger;
 import java.sql.*;
 
 /**
@@ -9,7 +10,7 @@ import java.sql.*;
  */
 @Component
 public class InputRecord {
-    private Long alert_id;
+    private BigInteger alert_id;
     private String category;
     private String component;
     private String priority;
@@ -19,11 +20,11 @@ public class InputRecord {
     private String results_link;
     private Double error_count;
 
-    public Long getAlert_id() {
+    public BigInteger getAlert_id() {
         return alert_id;
     }
 
-    public void setAlert_id(Long alert_id) {
+    public void setAlert_id(BigInteger alert_id) {
         this.alert_id = alert_id;
     }
 

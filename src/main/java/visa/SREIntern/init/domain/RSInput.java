@@ -1,7 +1,7 @@
 package visa.SREIntern.init.domain;
 
 import org.json.*;
-
+import visa.SREIntern.init.generators.*;
 import java.sql.Timestamp;
 
 
@@ -63,7 +63,7 @@ public class RSInput extends Input{
         super();
 
         //alert_id
-        setAlert_id((long)123456789);
+        setAlert_id(IdGenerator.INSTANCE.generateNewId());
 
         //category + component - set in RelayControllerImpl
 
@@ -82,8 +82,8 @@ public class RSInput extends Input{
         setAlert_source("Runscope");
 
         //alert_time
-        long finished = obj.getLong("finished_at");
-        setAlert_time(new Timestamp(finished));
+        long started = obj.getLong("started_at");
+        setAlert_time(new Timestamp(started));
 
         //alert_title
         setAlert_title(obj.getString("test_name"));
@@ -170,6 +170,10 @@ public class RSInput extends Input{
         }
     }
 
+    /**
+     * Calculates the priority of the alert, based on the ratio of error count to total count.
+     * @return a String representing the priority of the alert (P1 - P5)
+     */
     private String calcPriority(){
         double ratio = (double)errorCount/(double)totalNumTests;
 
@@ -185,7 +189,7 @@ public class RSInput extends Input{
             return "P1";
         }
 
-        // include a situation where error > total count?
+        // does not account for when error > total. Should be impossible.
     }
 
 

@@ -1,9 +1,11 @@
 package visa.SREIntern.init.mappers;
 
 
+import java.math.BigInteger;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+
 
 import org.springframework.jdbc.core.RowMapper;
 import visa.SREIntern.init.storage.InputRecord;
@@ -17,7 +19,7 @@ public class InputMapper implements RowMapper<InputRecord>{
     public InputRecord mapRow(ResultSet rs, int i) throws SQLException {
         InputRecord input = new InputRecord();
 
-        input.setAlert_id(rs.getLong("ALERT_ID"));
+        input.setAlert_id(new BigInteger(Integer.valueOf(rs.getInt("ALERT_ID")).toString()));
         input.setCategory(rs.getString("CATEGORY"));
         input.setComponent(rs.getString("COMPONENT"));
         input.setPriority(rs.getString("PRIORITY"));

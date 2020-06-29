@@ -43,7 +43,6 @@ public class RelayControllerImpl implements RelayController {
      */
     private String process(String input, String category, String component, String inputType){
         try{
-            System.out.println("Server up and running.");
 
             JSONObject obj = new JSONObject(input);
             System.out.println("JSONObject created successfully.");
@@ -51,11 +50,11 @@ public class RelayControllerImpl implements RelayController {
             System.out.println("input object returned.");
 
             if (imp == null){
-                System.out.println("Houston, we have a problem");
+                System.out.println("Something went wrong creating the input.");
             } else {
                 imp.setCategory(category);
                 imp.setComponent(component);
-                System.out.println(imp);
+
                 imp.inputData(inputJDBCTemplate);
             }
 

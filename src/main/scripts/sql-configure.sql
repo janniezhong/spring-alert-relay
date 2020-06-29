@@ -15,14 +15,14 @@ GRANT INSERT ON ars_dev.* to 'ars_dev_user'@'localhost';
 GRANT DELETE ON ars_dev.* to 'ars_dev_user'@'localhost';
 GRANT UPDATE ON ars_dev.* to 'ars_dev_user'@'localhost';
 GRANT EXECUTE ON PROCEDURE ars_dev.RP_INST_ALERT to 'ars_dev_user'@'localhost';
-GRANT ALL ON ars_dev.RP_INST_ALERT to 'ars_dev_user'@'localhost';
+#GRANT ALL ON ars_dev.RP_INST_ALERT to 'ars_dev_user'@'localhost';
 
 GRANT SELECT ON ars_dev.* to 'ars_dev_user'@'%';
 GRANT INSERT ON ars_dev.* to 'ars_dev_user'@'%';
 GRANT DELETE ON ars_dev.* to 'ars_dev_user'@'%';
 GRANT UPDATE ON ars_dev.* to 'ars_dev_user'@'%';
 GRANT EXECUTE ON PROCEDURE ars_dev.RP_INST_ALERT to 'ars_dev_user'@'%';
-GRANT ALL ON ars_dev.RP_INST_ALERT to 'ars_dev_user'@'%';
+#GRANT ALL ON ars_dev.RP_INST_ALERT to 'ars_dev_user'@'%';
 
 
 use ars_dev;

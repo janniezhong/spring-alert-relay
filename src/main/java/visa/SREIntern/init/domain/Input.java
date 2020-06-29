@@ -1,6 +1,7 @@
 package visa.SREIntern.init.domain;
 
 import visa.SREIntern.init.storage.InputJDBCTemplate;
+import java.math.BigInteger;
 
 import java.sql.Timestamp;
 
@@ -10,7 +11,7 @@ import java.sql.Timestamp;
  */
 public abstract class Input {
 
-    private Long alert_id;
+    private BigInteger alert_id;
     private String category;
     private String component;
     private String priority;
@@ -26,29 +27,6 @@ public abstract class Input {
     public Input() {
     }
 
-    /**
-     * Creates an instance of the Input class with the given parameters.
-     * @param alert_id
-     * @param category
-     * @param component
-     * @param priority
-     * @param alert_source
-     * @param alert_time
-     * @param alert_title
-     * @param results_link
-     * @param error_count
-     */
-    public Input(Long alert_id, String category, String component, String priority, String alert_source, Timestamp alert_time, String alert_title, String results_link, Double error_count) {
-        this.alert_id = alert_id;
-        this.category = category;
-        this.component = component;
-        this.priority = priority;
-        this.alert_source = alert_source;
-        this.alert_time = alert_time;
-        this.alert_title = alert_title;
-        this.results_link = results_link;
-        this.error_count = error_count;
-    }
 
     /**
      * Inputs given data into {@link InputJDBCTemplate}
@@ -67,11 +45,11 @@ public abstract class Input {
 
     }
 
-    public Long getAlert_id() {
+    public BigInteger getAlert_id() {
         return alert_id;
     }
 
-    public void setAlert_id(Long alert_id) {
+    public void setAlert_id(BigInteger alert_id) {
         this.alert_id = alert_id;
     }
 
@@ -153,4 +131,6 @@ public abstract class Input {
                 ", error_count=" + error_count +
                 '}';
     }
+
+
 }
