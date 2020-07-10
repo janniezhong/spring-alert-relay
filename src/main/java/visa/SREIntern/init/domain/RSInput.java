@@ -157,18 +157,18 @@ public class RSInput extends Input{
 
     }
 
-    /**
-     * Converts a String into a boolean, dependent on the content of the String.
-     * @param result String from the JSON payload to be evaluated.
-     * @return a Boolean representing the input String.
-     */
-    private static Boolean evalResult(String result){
-        if (result.equalsIgnoreCase("pass")){
-            return true;
-        } else {
-            return false;
-        }
-    }
+//    /**
+//     * Converts a String into a boolean, dependent on the content of the String.
+//     * @param result String from the JSON payload to be evaluated.
+//     * @return a Boolean representing the input String.
+//     */
+//    private static Boolean evalResult(String result){
+//        if (result.equalsIgnoreCase("pass")){
+//            return true;
+//        } else {
+//            return false;
+//        }
+//    }
 
     /**
      * Calculates the priority of the alert, based on the ratio of error count to total count.

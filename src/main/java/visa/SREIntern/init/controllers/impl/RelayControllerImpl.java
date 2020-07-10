@@ -1,8 +1,11 @@
 package visa.SREIntern.init.controllers.impl;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
+import visa.SREIntern.init.AlertRelayApplication;
 import visa.SREIntern.init.controllers.RelayController;
 import visa.SREIntern.init.domain.*;
 import org.json.*;
@@ -13,6 +16,8 @@ import visa.SREIntern.init.storage.InputRecord;
 
 @Controller
 public class RelayControllerImpl implements RelayController {
+    private static final Logger LOGGER = LogManager.getLogger(RelayControllerImpl.class);
+
     private InputFactory inputFactory;
     ApplicationContext context;
     InputJDBCTemplate inputJDBCTemplate;
@@ -43,24 +48,23 @@ public class RelayControllerImpl implements RelayController {
      */
     private String process(String input, String category, String component, String inputType){
         try{
-
+            LOGGER.info("Server request received");
             JSONObject obj = new JSONObject(input);
-            System.out.println("JSONObject created successfully.");
+            LOGGER.info("JSONObject created successfully.");
             Input imp = inputFactory.getInput(inputType,obj);
-            System.out.println("input object returned.");
+            LOGGER.info("Input object returned.");
 
             if (imp == null){
-                System.out.println("Something went wrong creating the input.");
+                LOGGER.error("Something went wrong creating the input.");
             } else {
                 imp.setCategory(category);
                 imp.setComponent(component);
-
                 imp.inputData(inputJDBCTemplate);
             }
 
             return ("success");
         } catch(Exception exc){
-            System.out.println("Message: " +exc.getMessage());
+            LOGGER.error("JSON from webhook not formatted correctly, unable to create Input object. Exception message: "+ exc.getMessage());
             throw new CustomException(exc.getMessage());
         }
     }
