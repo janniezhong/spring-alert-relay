@@ -87,7 +87,7 @@ public class InputJDBCTemplate implements InputRecordDAO {
         String err_msg = (String) out.get("ERR_MSG");
 
         if (return_code == 0){
-            LOGGER.info("Database entry successful, with no errors.");
+            LOGGER.info("Database entry successful, with no errors. Input was: "+ in.toString());
         } else {
             LOGGER.error("Database entry attempted, and unsuccessful. Results were: return code: "+ return_code + ", error message: " + err_msg);
 

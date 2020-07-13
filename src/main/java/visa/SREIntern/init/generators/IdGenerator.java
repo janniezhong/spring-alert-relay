@@ -32,7 +32,7 @@ public class IdGenerator {
         long serial = idSerial.getAndIncrement() % 10000;
         long milliseconds = System.currentTimeMillis() % 1000000000000L;
         String id = String.format(ID_FORMAT, milliseconds, serial);
-        LOGGER.info("Unique id for alert generated.");
+        LOGGER.info("Unique id for alert generated: " + id);
         return new BigInteger(id);
     }
 

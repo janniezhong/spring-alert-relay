@@ -1,6 +1,7 @@
 package visa.SREIntern.init.controllers;
 
 import org.json.JSONException;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -21,7 +22,7 @@ public interface RelayController {
      * @return the String that links to a static html page to display.
      */
     @PostMapping("/runscope")
-    String processRS(@RequestBody String input, @RequestHeader("Category") String category, @RequestHeader("Component") String component);
+    ResponseEntity<String> processRS(@RequestBody String input, @RequestHeader("Category") String category, @RequestHeader("Component") String component);
 
     /**
      * Posts the JSON payload to be processed as a Ghost Inspector input.
@@ -29,6 +30,6 @@ public interface RelayController {
      * @return the String that links to a static html page to display.
      */
     @PostMapping("/ghostinspector")
-    String processGI(@RequestBody String input, @RequestHeader("Category") String category, @RequestHeader("Component") String component);
+    ResponseEntity<String> processGI(@RequestBody String input, @RequestHeader("Category") String category, @RequestHeader("Component") String component);
 
 }

@@ -119,7 +119,7 @@ public abstract class Input {
 
     @Override
     public String toString() {
-        return "Input{" +
+        return "Input {" +
                 "alert_id=" + alert_id +
                 ", category='" + category + '\'' +
                 ", component='" + component + '\'' +
