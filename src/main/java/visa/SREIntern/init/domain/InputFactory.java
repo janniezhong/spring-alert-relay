@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
  * Class to create the necessary Input classes (as part of a factory pattern).
  */
 @Component
-public class InputFactory {
+public class InputFactory extends Input {
 
     /**
      * Initializes an input class given the inputType (i.e. Runscope, Ghost Inspector)

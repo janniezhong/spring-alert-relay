@@ -63,7 +63,6 @@ public class RelayControllerImpl implements RelayController {
                 imp.setCategory(category);
                 imp.setComponent(component);
                 imp.inputData(inputJDBCTemplate);
-
             }
 
             ResponseEntity<String> responseMsg = new ResponseEntity<>("Input success. " + imp.toString() + "\n", HttpStatus.OK);
